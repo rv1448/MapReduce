@@ -43,9 +43,7 @@ public class Mapreducetoolrunner extends Configured implements Tool  {
 
         // implementation of reducer
         public static class Reducertool extends Reducer<Text,IntWritable,Text,IntWritable>{
-
         @Override
-
             public void reduce(Text z, Iterable<IntWritable> t, Context context) throws  IOException, InterruptedException{
                 int sum = 0;
                 Iterator<IntWritable> k = t.iterator();
@@ -55,8 +53,6 @@ public class Mapreducetoolrunner extends Configured implements Tool  {
                 }
             }
         }
-
-
         public int run(String[] args) throws  IOException, InterruptedException,ClassNotFoundException{
            if(args.length != 2){
                System.err.println("In valid Command");
@@ -76,14 +72,9 @@ public class Mapreducetoolrunner extends Configured implements Tool  {
             FileInputFormat.addInputPath(job, inputpath);
             return job.waitForCompletion(true) ? 0 : 1;
         }
-
         public static void main(String[] args) throws Exception{
             int exitcode = ToolRunner.run(new Mapreducetoolrunner(), args);
             System.exit(exitcode);
         }
 
-
-
     }
-
-
