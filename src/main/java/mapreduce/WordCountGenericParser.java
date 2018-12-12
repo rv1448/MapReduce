@@ -1,3 +1,5 @@
+ /*
+
 package mapreduce;
 
 import java.io.IOException;
@@ -93,3 +95,4 @@ public class WordCountGenericParser {
     }
 
 }
+*/
