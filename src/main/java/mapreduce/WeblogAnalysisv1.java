@@ -18,18 +18,19 @@ import java.util.regex.Matcher;
 import java.io.IOException;
 
 public class WeblogAnalysisv1 extends Configured implements Tool {
-    public static String APACHE_ACCESS_LOGS_PATTERN = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+) (.+?) \"([^\"]+|(.+?))\"";
 
-    public static Pattern pattern = Pattern.compile(APACHE_ACCESS_LOGS_PATTERN);
 
-    private static final IntWritable one = new IntWritable(1);
-
-     public class WeblogAnalysismapper extends Mapper<LongWritable, Text,Text,IntWritable>{
+     public static class WeblogAnalysismapper extends Mapper<LongWritable, Text,Text,IntWritable>{
 
             private Text url = new Text();
+         public static String APACHE_ACCESS_LOGS_PATTERN = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+) (.+?) \"([^\"]+|(.+?))\"";
 
+         public static Pattern pattern = Pattern.compile(APACHE_ACCESS_LOGS_PATTERN);
 
-         public void map(Object key, Text value, Context context)
+         private static final IntWritable one = new IntWritable(1);
+
+            @Override
+         public void map(LongWritable key, Text value, Context context)
                  throws IOException, InterruptedException {
              Matcher matcher = pattern.matcher(value.toString());
              if (matcher.matches()) {
@@ -42,10 +43,17 @@ public class WeblogAnalysisv1 extends Configured implements Tool {
          }
      }
 
-    public class WeblogAnalysisreducer extends Reducer<Text,IntWritable, Text,Text>{
-
+    public static class WeblogAnalysisreducer extends Reducer<Text,IntWritable, Text,IntWritable>   {
+        private IntWritable result = new IntWritable();
          @Override
-         public void reduce(Text a, Iterable<IntWritable> b, Context context){
+         public void reduce(Text a, Iterable<IntWritable> b, Context context) throws IOException,InterruptedException{
+
+                 int sum = 0;
+                 for (IntWritable val : b) {
+                     sum += val.get();
+                 }
+                 this.result.set(sum);
+                 context.write(a, this.result);
 
          }
 
@@ -63,14 +71,14 @@ public class WeblogAnalysisv1 extends Configured implements Tool {
          job.setJarByClass(WeblogAnalysisv1.class);
          job.setMapperClass(WeblogAnalysismapper.class);
          job.setReducerClass(WeblogAnalysisreducer.class);
-
+        job.setCombinerClass(WeblogAnalysisreducer.class);
         Path input = new Path(args[0]);
         Path output = new Path(args[1]);
 
         FileInputFormat.addInputPath(job,input);
         FileOutputFormat.setOutputPath(job,output);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
         return job.waitForCompletion(true)?0:1;
     }
 
