@@ -47,14 +47,14 @@ public static class Invertedindexreducer extends Reducer<Text,Text, Text, Text>{
     public void reduce(Text c, Iterable<Text> p, Context context) throws IOException, InterruptedException{
         StringBuilder h = new StringBuilder();
 
-        Iterator<Text> q = p.iterator();
+       // Iterator<Text> q = p.iterator();
 
         for(Text value : p){
             h.append(value.toString());
             if(p.iterator().hasNext()){
                 h.append("|");
             }
-            context.write(c,new Text(h.toString()));
+            context.write(new Text(c),new Text(h.toString()));
         }
     }
 }
@@ -72,7 +72,7 @@ public static class Invertedindexreducer extends Reducer<Text,Text, Text, Text>{
     conf.setBoolean("mapreduce.input.fileinputformat.input.dir.recursive", true);
 
     Job job = new Job(conf,"Inverted index");
-    job.getConfiguration().set("mapreduce.output.textoutputformat.seperator","|");
+    //job.getConfiguration().set("mapreduce.output.textoutputformat.seperator","|");
     job.setJarByClass(Invertedindex.class);
 
     job.setMapperClass(Invertedindexmapper.class);
