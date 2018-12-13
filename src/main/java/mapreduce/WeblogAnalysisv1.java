@@ -22,12 +22,11 @@ public class WeblogAnalysisv1 extends Configured implements Tool {
 
      public static class WeblogAnalysismapper extends Mapper<LongWritable, Text,Text,IntWritable>{
 
-            private Text url = new Text();
+            private Text url = new Text(); /// have to look back
          public static String APACHE_ACCESS_LOGS_PATTERN = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+) (.+?) \"([^\"]+|(.+?))\"";
 
-         public static Pattern pattern = Pattern.compile(APACHE_ACCESS_LOGS_PATTERN);
+         public static Pattern pattern = Pattern.compile(APACHE_ACCESS_LOGS_PATTERN); /// have to look back
 
-         private static final IntWritable one = new IntWritable(1);
 
             @Override
          public void map(LongWritable key, Text value, Context context)
@@ -59,7 +58,7 @@ public class WeblogAnalysisv1 extends Configured implements Tool {
 
      }
 
-    public int run(String[] args) throws IOException, InterruptedException,ClassNotFoundException{
+    public int run(String[] args) throws IOException, InterruptedException,ClassNotFoundException{ /// have to look back
          if(args.length!=2){
              System.err.print("pass two parameters seperated by space");
              return -1;
@@ -79,12 +78,12 @@ public class WeblogAnalysisv1 extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job,output);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        return job.waitForCompletion(true)?0:1;
+        return job.waitForCompletion(true)?0:1; /// have to look back
     }
 
 
     public static void main(String[] args) throws  Exception{
-         int exitcode = ToolRunner.run(new WeblogAnalysisv1(),args);
+         int exitcode = ToolRunner.run(new WeblogAnalysisv1(),args); /// have to look back
          System.exit(exitcode);
     }
 }
