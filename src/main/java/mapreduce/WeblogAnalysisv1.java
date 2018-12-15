@@ -1,5 +1,12 @@
 package mapreduce;
 
+/*  Find the pages with most number of visits
+  next steps
+* Most number of referral sites (hint: use a referral group from the matcher)
+* Number of client errors (with the Http status of 4XX)
+* Number of of server errors (with the Http status of 5XX)
+*/
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -12,13 +19,14 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.ToolRunner;
+
+
 import java.util.regex.Pattern;
 import org.apache.hadoop.io.IntWritable;
 import java.util.regex.Matcher;
 import java.io.IOException;
 
 public class WeblogAnalysisv1 extends Configured implements Tool {
-
 
      public static class WeblogAnalysismapper extends Mapper<LongWritable, Text,Text,IntWritable>{
 
