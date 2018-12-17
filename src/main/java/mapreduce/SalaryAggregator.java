@@ -16,21 +16,19 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public  class SalaryAggregator extends Configured implements Tool {
 
 public  static class Salarymapper extends Mapper<LongWritable, Text,Text, IntWritable>{
-     public IntWritable salary;
-     public String creditcardtype;
-
-    public  String[] k;
-    public Text cardtype;
+     public IntWritable salary = new IntWritable();
+     public String creditcardtype = new String();
+        public Text cardtype = new Text(); // Issue Didn't new up instance;
+    public String[] k;
 
 
     @Override
     public void map(LongWritable Key, Text value, Context context) throws  IOException, InterruptedException{
-        k = value.toString().split("|");
+        k = value.toString().split("\\|");  // Escape for the metacharacter
         for(String z: k){
             System.out.print(z);
         }
@@ -40,12 +38,8 @@ public  static class Salarymapper extends Mapper<LongWritable, Text,Text, IntWri
         //int salary = Integer.parseInt(k[2]);
         cardtype.set(k[3]);
       context.write(cardtype , salary);
-
-
     }
-
-
-}
+ }
 
 public static class SalaryReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
 
@@ -58,15 +52,9 @@ public static class SalaryReducer extends Reducer<Text, IntWritable, Text, IntWr
          sum += a.get();
          context.write(key,new IntWritable(sum));
      }
-
-
-
-
-    }
+     }
 
 }
-
-
     public int run(String[] args) throws IOException,InterruptedException, ClassNotFoundException {
     if(args.length!= 2){
         System.err.println("please pass all the parameters needed");
@@ -94,13 +82,10 @@ public static class SalaryReducer extends Reducer<Text, IntWritable, Text, IntWr
 
     return job.waitForCompletion(true)? 0:1;
 
-
-
 }
 
 public static   void main(String[] args) throws Exception{
     int exitcode = ToolRunner.run(new SalaryAggregator(),args);
-
     System.exit(exitcode);
 }
 }
