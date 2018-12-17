@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 public  class SalaryAggregator extends Configured implements Tool {
 
 public  static class Salarymapper extends Mapper<LongWritable, Text,Text, IntWritable>{
-        public IntWritable salary;
+     public IntWritable salary;
      public String creditcardtype;
 
     public  String[] k;
@@ -29,13 +29,18 @@ public  static class Salarymapper extends Mapper<LongWritable, Text,Text, IntWri
 
 
     @Override
-    public void map(LongWritable Key, Text value, Context context){
+    public void map(LongWritable Key, Text value, Context context) throws  IOException, InterruptedException{
         k = value.toString().split("|");
+        for(String z: k){
+            System.out.print(z);
+        }
 
         creditcardtype = k[3];
         salary.set(Integer.parseInt(k[2]));
+        //int salary = Integer.parseInt(k[2]);
         cardtype.set(k[3]);
-        Context.write(cardtype, salary);
+      context.write(cardtype , salary);
+
 
     }
 
@@ -45,7 +50,15 @@ public  static class Salarymapper extends Mapper<LongWritable, Text,Text, IntWri
 public static class SalaryReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
 
     @Override
-    public void reduce(Text Key, Iterable<IntWritable> value, Context context){  // Forgetting Iterable
+    public void reduce(Text key, Iterable<IntWritable> value, Context context) throws  IOException, InterruptedException
+    {  // Forgetting Iterable
+    int sum =0;
+
+     for( IntWritable a : value){
+         sum += a.get();
+         context.write(key,new IntWritable(sum));
+     }
+
 
 
 
