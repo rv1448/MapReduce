@@ -1,6 +1,7 @@
 package Misc;
 
 
+import javafx.scene.control.TextFormatter;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.io.LongWritable;
@@ -47,6 +48,10 @@ public class Inverted_index extends Configured implements Tool
 
         job.setJobName("Inverted");
         job.setJarByClass(Inverted_index.class);
+//        job.setInputFormatClass(TextFormatter.class);
+
+        job.setMapperClass(Invertedmapper.class);
+        job.setReducerClass(Invertedreducer.class);
 
         Path input = new Path(args[0]);
         Path output = new Path(args[1]);
