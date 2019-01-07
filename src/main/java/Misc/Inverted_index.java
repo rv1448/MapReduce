@@ -50,7 +50,7 @@ public class Inverted_index extends Configured implements Tool
 
     public static class Invertedreducer extends Reducer<Text, Text, Text, Text>{
         @Override
-        public void reduce(Text Key, Iterable<Text> value, Context context){
+        public void reduce(Text Key, Iterable<Text> value, Context context) throws IOException, InterruptedException{
 
             StringBuilder stringbuilder = new StringBuilder();
 
@@ -64,7 +64,7 @@ public class Inverted_index extends Configured implements Tool
 
             }
 
-            context.t
+            context.write(Key, new Text(stringbuilder.toString()));
         }
 
     }
