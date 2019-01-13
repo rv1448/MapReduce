@@ -82,6 +82,7 @@ public class Inverted_index extends Configured implements Tool
         job.setJobName("Inverted");
         job.setJarByClass(Inverted_index.class);
 //        job.setInputFormatClass(TextFormatter.class);
+        job.getConfiguration().set("mapreduce.output.textoutputformat.seperator","|");
 
         job.setMapperClass(Invertedmapper.class);
         job.setReducerClass(Invertedreducer.class);
