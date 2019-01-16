@@ -2,7 +2,7 @@ package Misc;
 
 import org.apache.hadoop.io.* ;
 import java.util.* ;
-public class WritablesTest {
+public class Customwritable {
 
         public static class IntArrayWritable extends ArrayWritable
         {
