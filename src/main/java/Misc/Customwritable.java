@@ -12,6 +12,8 @@ public class Customwritable {
             }
         }
 
+
+
         public static void main(String[] args)
         {
             System.out.println("*** Primitive Writables ***") ;
