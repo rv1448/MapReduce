@@ -6,7 +6,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.util.Tool;
 
-public class AirlinedataCompressed extends Configured implements Tool {
+public class AirlinedataBZ2 extends Configured implements Tool {
 
 
     public static class Airlinedatamapper extends Mapper<LongWritable, Text, Text,Text>{

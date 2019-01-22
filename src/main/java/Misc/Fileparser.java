@@ -1,21 +1,26 @@
 package Misc;
 
-import org.apache.commons.lang.StringUtils;
-
-import java.util.StringTokenizer;
-
 public class Fileparser {
 
 
-    public static void main(String[] args) {
-        String row = new String();
-        StringTokenizer string = new StringTokenizer(row);
+     Fileparser(String row)
+     {
 
+        String[] a = row.split(",");
 
+        while (isheader(a[0]) != true)
+        {
 
+        }
+     }
 
-
-
+    public boolean isheader(String b ) {
+        if (b == "YEAR") {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 
