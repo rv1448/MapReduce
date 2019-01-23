@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
@@ -57,6 +58,7 @@ public class AirlinedataBZ2 extends Configured implements Tool {
         job.setMapperClass(Airlinedatamapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+        job.setNumReduceTasks(0);
         Path input = new Path(args[0]);
         Path output = new Path(args[1]);
         FileInputFormat.addInputPath(job,input);
@@ -68,5 +70,8 @@ public class AirlinedataBZ2 extends Configured implements Tool {
     }
 
 
-
+    public static   void main(String[] args) throws Exception{
+        int exitcode = ToolRunner.run(new AirlinedataBZ2(),args);
+        System.exit(exitcode);
+    }
 }

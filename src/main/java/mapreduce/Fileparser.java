@@ -38,13 +38,13 @@ String Year;
 
         while (isheader(a[0]) != true)
         {
-            Year  =  new String(a[0]);
-
+            Year  =  a[0];
+            break;
         }
      }
 
     public boolean isheader(String b ) {
-        if (b  == "YEAR") {
+        if (b.equals("Year")) {
             return true;
         }
         else {
