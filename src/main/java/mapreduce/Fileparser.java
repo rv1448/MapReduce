@@ -36,20 +36,16 @@ String Year;
 //         LateAircraftDelay;
         String[] a = row.split(",");
 
-        while (isheader(a[0]) != true)
+        if (!isheader(a[0]))
         {
             Year  =  a[0];
-            break;
+            //break;
         }
      }
 
     public boolean isheader(String b ) {
-        if (b.equals("Year")) {
-            return true;
-        }
-        else {
-            return false;
-        }
+         return b.equals("Year");
+
     }
 
     public String getYear(){
