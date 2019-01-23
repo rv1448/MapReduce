@@ -11,6 +11,7 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.IOException;
 
@@ -44,8 +45,8 @@ public class AirlinedataBZ2 extends Configured implements Tool {
 
 
 
-    public int run(String[] args)  throws  IOException, InterruptedException,ClassNotFoundException {
-        if (args.length != 2) {
+    public int run(String[] allArgs)  throws  IOException, InterruptedException,ClassNotFoundException {
+        if (allArgs.length != 2) {
             System.err.printf("Invalid parameters supplied");
             return -1;
         }
@@ -59,6 +60,9 @@ public class AirlinedataBZ2 extends Configured implements Tool {
         job.setMapOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         job.setNumReduceTasks(0);
+
+        String[] args = new GenericOptionsParser(getConf(), allArgs)
+                .getRemainingArgs();
         Path input = new Path(args[0]);
         Path output = new Path(args[1]);
         FileInputFormat.addInputPath(job,input);
