@@ -1,29 +1,76 @@
 package mapreduce;
 
+//Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,
+//        FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,
+//        Dest,Distance,TaxiIn,TaxiOut,Cancelled,
+//CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+public class Fileparser1 {
+    String Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier;
+    String FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin;
+    String Dest,Distance,TaxiIn,TaxiOut,Cancelled;
+    String CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay;
+    String[] row1;
 
-public  class Fileparser1 {
-     String Year, DayofMonth,DayOfWeek,DepTime;
-     String[] row1;
+    public String[] splitrow(String row1) {
+        this.row1 = row1.split(",");
+        return this.row1;
+    }
 
-     public String[] splitrow(String row1){
-       this.row1 = row1.split(",");
-       return this.row1;
-     }
-
-    public   boolean isheader(String[] row1 ) {  return row1.equals("Year");}
+    public boolean isheader(String[] row1) {
+        return row1.equals("Year");
+    }
 
 
-    public  StringBuilder   commaseparated( String[] arr){
-        StringBuilder comma  = new StringBuilder(" ");
+    public StringBuilder commaseparated(String[] arr) {
+        StringBuilder comma = new StringBuilder(" ");
         Year = arr[0];
-        DayofMonth = arr[1];
-        DayOfWeek = arr[2];
-        DepTime =arr[3];
+        Month = arr[1];
+        DayofMonth = arr[2];
+        DayOfWeek = arr[3];
+        DepTime= arr[4];
+
+        CRSDepTime= arr[5];
+        ArrTime= arr[6];
+        CRSArrTime= arr[7];
+        UniqueCarrier= arr[8];
+        FlightNum = arr[9];
+        TailNum = arr[10];
+        ActualElapsedTime= arr[11];
+        CRSElapsedTime= arr[12];
+        AirTime= arr[13];
+        ArrDelay= arr[14];
+        DepDelay= arr[15];
+        Origin= arr[16];
+
+        Dest = arr[17];
+        Distance= arr[18];
+        TaxiIn= arr[19];
+        TaxiOut= arr[20];
+        Cancelled= arr[21];
+        CancellationCode= arr[21];
+        Diverted= arr[23];
+        CarrierDelay= arr[24];
+        WeatherDelay= arr[25];
+        NASDelay= arr[26];
+        SecurityDelay= arr[27];
+        LateAircraftDelay= arr[28];
 
         comma.append(Year).append(",");
         comma.append(DayofMonth).append(",");
         comma.append(DayOfWeek).append(",");
+        comma.append(DepTime).append(",");
+
+
+        comma.append(CRSDepTime);
         comma.append(DepTime);
+        comma.append(DepTime);
+        comma.append(DepTime);
+        comma.append(DepTime);
+        comma.append(DepTime);
+
+
+
+
         return  comma;
     }
 }
