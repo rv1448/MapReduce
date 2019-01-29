@@ -23,22 +23,42 @@ public class AirlinedataBZ2 extends Configured implements Tool {
 
         @Override
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
-            Text val = new Text();
+//            Text val = new Text();
 //            String f = new String();
             String h;
             h = value.toString();
 
             try {
                 Fileparser f = new Fileparser(h);
+
                 System.out.print(f.printrow());
                 String s = new String(f.printrow());
                 System.out.println(s);
-                val.set(s);
+
+                context.write( new Text(s),new IntWritable(1) );
             }
             catch (Exception e){
                 e.printStackTrace();
             }
-            context.write( new Text(val),new IntWritable(1) );
+
+
+
+//            try {
+//                Fileparser1 f = new Fileparser1();
+//
+//                String[] k = f.splitrow(h);
+//                if(f.isheader(k)!= true) {
+//                    StringBuilder m = f.commaseparated(k);
+//                    context.write( new Text(m.toString()),new IntWritable(1) );
+//                }
+//
+//
+//
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//            }
+
 
         }
 
