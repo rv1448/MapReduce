@@ -1,15 +1,12 @@
 package mapreduce;
 
-//Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,
-//        FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,
-//        Dest,Distance,TaxiIn,TaxiOut,Cancelled,
-//CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+
 public class Fileparser1 {
-    String Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier;
-    String FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin;
-    String Dest,Distance,TaxiIn,TaxiOut,Cancelled;
-    String CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay;
-    String[] row1;
+   private String Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier;
+    private String FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin;
+    private String Dest,Distance,TaxiIn,TaxiOut,Cancelled;
+    private   String CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay;
+    private String[] row1;
 
     public String[] splitrow(String row1) {
         this.row1 = row1.split(",");
