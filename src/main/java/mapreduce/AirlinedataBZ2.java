@@ -68,6 +68,7 @@ public class AirlinedataBZ2 extends Configured implements Tool {
         FileInputFormat.addInputPath(job,input);
         FileOutputFormat.setOutputPath(job,output);
         System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.setNumReduceTasks(0);
         return job.waitForCompletion(true)?0 : 1;
 
 

@@ -2,10 +2,11 @@ package mapreduce;
 
 
 public class Fileparser {
-String Year;
+   static String Year, DayofMonth;
 
-     Fileparser(String row)
+    Fileparser(String row)
      {
+
 //         String
 //         DayofMonth,
 //         DayOfWeek,
@@ -39,18 +40,20 @@ String Year;
         if (!isheader(a[0]))
         {
             Year  =  a[0];
+            DayofMonth = a[1];
             //break;
         }
      }
 
-    public boolean isheader(String b ) {
+    public static boolean isheader(String b ) {
          return b.equals("Year");
 
     }
 
-    public String getYear(){
-         return this.Year;
+    public static String getYear(){
+         return Year;
     }
+
 
 
 
