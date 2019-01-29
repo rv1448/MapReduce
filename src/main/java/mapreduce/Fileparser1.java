@@ -38,6 +38,7 @@ public class Fileparser1 {
         ActualElapsedTime= arr[11];
         CRSElapsedTime= arr[12];
         AirTime= arr[13];
+
         ArrDelay= arr[14];
         DepDelay= arr[15];
         Origin= arr[16];
@@ -60,13 +61,34 @@ public class Fileparser1 {
         comma.append(DayOfWeek).append(",");
         comma.append(DepTime).append(",");
 
+        comma.append(CRSDepTime).append(",");
+        comma.append(ArrTime).append(",");
+        comma.append(CRSArrTime).append(",");
+        comma.append(UniqueCarrier).append(",");
+        comma.append(FlightNum).append(",");
+        comma.append(TailNum).append(",");
+        comma.append(ActualElapsedTime).append(",");
+        comma.append(CRSElapsedTime).append(",");
+        comma.append(AirTime).append(",");
 
-        comma.append(CRSDepTime);
-        comma.append(DepTime);
-        comma.append(DepTime);
-        comma.append(DepTime);
-        comma.append(DepTime);
-        comma.append(DepTime);
+        comma.append(ArrDelay).append(",");
+        comma.append(DepDelay).append(",");
+        comma.append(Origin).append(",");
+        comma.append(Dest).append(",");
+        comma.append(Distance).append(",");
+        comma.append(TaxiIn).append(",");
+        comma.append(TaxiOut).append(",");
+
+        comma.append(Cancelled).append(",");
+        comma.append(CancellationCode).append(",");
+        comma.append(Diverted).append(",");
+        comma.append(CarrierDelay).append(",");
+        comma.append(WeatherDelay).append(",");
+
+        comma.append(NASDelay).append(",");
+        comma.append(SecurityDelay).append(",");
+        comma.append(LateAircraftDelay);
+
 
 
 
