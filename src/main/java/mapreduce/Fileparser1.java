@@ -14,7 +14,7 @@ public class Fileparser1 {
     }
 
     public boolean isheader(String[] row1) {
-        return row1.equals("Year");
+        return row1[0].equals("Year");
     }
 
 

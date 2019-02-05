@@ -69,7 +69,7 @@ public class AirlinedataBZ2 extends Configured implements Tool {
         job.setMapperClass(Airlinedatamapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        job.setNumReduceTasks(0);
+        job.setNumReduceTasks(1);
 
         String[] args = new GenericOptionsParser(getConf(), allArgs)
                 .getRemainingArgs();
