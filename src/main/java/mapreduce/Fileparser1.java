@@ -1,6 +1,5 @@
 package mapreduce;
 
-
 public class Fileparser1 {
     private static  String Year, Month, DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier;
     private static String FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin;
@@ -22,7 +21,7 @@ public class Fileparser1 {
         return Year;
     }
 
-    public static void setYear(String year) {
+    public static void setYear(String[] row1) {
         Year = row1[0];
     }
 
@@ -30,13 +29,30 @@ public class Fileparser1 {
         return Month;
     }
 
-    public static void setMonth(String month) {
+    public static void setMonth(String[] row1) {
         Month =  row1[1];
     }
 
     public static String getDayofMonth() {
         return DayofMonth;
     }
+
+    public static String getDate()   {
+
+            String a = new String(getYear() + "-" + getMonth() + "-" + "1");
+
+
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+//        LocalDate date = LocalDate.of()
+//        Date y = Date.parse( a);
+//            Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(a);
+            return a;
+        }
+//
+//    catch(Exception e){
+//        return new SimpleDateFormat("yyyy-mm-dd").parse("9999-12-01");
+//    }
+//    }
 
     public static void setDayofMonth(String dayofMonth) {
         DayofMonth = row1[2];
@@ -253,41 +269,43 @@ public class Fileparser1 {
 
     public static StringBuilder commaseparated(String[] arr) {
         StringBuilder comma = new StringBuilder(" ");
-//        Year = arr[0];
-//        Month = arr[1];
-//        DayofMonth = arr[2];
-//        DayOfWeek = arr[3];
-//        DepTime = arr[4];
-//
-//        CRSDepTime = arr[5];
-//        ArrTime = arr[6];
-//        CRSArrTime = arr[7];
-//        UniqueCarrier = arr[8];
-//        FlightNum = arr[9];
-//        TailNum = arr[10];
-//        ActualElapsedTime = arr[11];
-//        CRSElapsedTime = arr[12];
-//        AirTime = arr[13];
-//
-//        ArrDelay = arr[14];
-//        DepDelay = arr[15];
-//        Origin = arr[16];
-//
-//        Dest = arr[17];
-//        Distance = arr[18];
-//        TaxiIn = arr[19];
-//        TaxiOut = arr[20];
-//        Cancelled = arr[21];
-//        CancellationCode = arr[21];
-//        Diverted = arr[23];
-//        CarrierDelay = arr[24];
-//        WeatherDelay = arr[25];
-//        NASDelay = arr[26];
-//        SecurityDelay = arr[27];
-//        LateAircraftDelay = arr[28];
+        Year = arr[0];
+        Month = arr[1];
+        DayofMonth = arr[2];
+        DayOfWeek = arr[3];
+        DepTime = arr[4];
 
-        comma.append(getYear()).append(",");
-        comma.append(getDayofMonth()).append(",");
+        CRSDepTime = arr[5];
+        ArrTime = arr[6];
+        CRSArrTime = arr[7];
+        UniqueCarrier = arr[8];
+        FlightNum = arr[9];
+        TailNum = arr[10];
+        ActualElapsedTime = arr[11];
+        CRSElapsedTime = arr[12];
+        AirTime = arr[13];
+
+        ArrDelay = arr[14];
+        DepDelay = arr[15];
+        Origin = arr[16];
+
+        Dest = arr[17];
+        Distance = arr[18];
+        TaxiIn = arr[19];
+        TaxiOut = arr[20];
+        Cancelled = arr[21];
+        CancellationCode = arr[21];
+        Diverted = arr[23];
+        CarrierDelay = arr[24];
+        WeatherDelay = arr[25];
+        NASDelay = arr[26];
+        SecurityDelay = arr[27];
+        LateAircraftDelay = arr[28];
+
+//        comma.append(getYear()).append(",");
+//
+//        comma.append(getDayofMonth()).append(",");
+        comma.append(getDate()).append(",");
         comma.append(getDayOfWeek()).append(",");
         comma.append(getDepTime()).append(",");
 
@@ -319,6 +337,18 @@ public class Fileparser1 {
         comma.append(getSecurityDelay()).append(",");
         comma.append(getLateAircraftDelay());
 
+
+        return comma;
+    }
+
+
+    public static StringBuilder commaseperatedwithfields(String[] arr){
+        StringBuilder comma = new StringBuilder(" ");
+        comma.append(arr[0]).append(",");
+
+        for(int i = 1 ; i<= arr.length; i++){
+            comma.append(",").append(i);
+        }
 
         return comma;
     }

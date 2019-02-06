@@ -19,6 +19,7 @@ import java.io.IOException;
 public class AirlinedataBZ2 extends Configured implements Tool {
 
 
+
     public static class Airlinedatamapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         @Override
@@ -42,11 +43,13 @@ public class AirlinedataBZ2 extends Configured implements Tool {
 //            }
 
           try {
-                Fileparser1 f = new Fileparser1();
+//               Fileparser1 f = new Fileparser1();
 
-                String[] k = f.splitrow(h);
-                if (f.isheader(k) != true) {
-                    StringBuilder m = f.commaseparated(k);
+                String[] k = Fileparser1.splitrow(h);
+                if (Fileparser1.isheader(k) != true) {
+
+                   StringBuilder m = Fileparser1.commaseparated(k);
+
                     context.write(new Text(m.toString()), new IntWritable(1));
                 }
             } catch (Exception e) {
@@ -69,7 +72,7 @@ public class AirlinedataBZ2 extends Configured implements Tool {
         job.setMapperClass(Airlinedatamapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        job.setNumReduceTasks(2);
+        job.setNumReduceTasks(1);
 
         String[] args = new GenericOptionsParser(getConf(), allArgs)
                 .getRemainingArgs();
