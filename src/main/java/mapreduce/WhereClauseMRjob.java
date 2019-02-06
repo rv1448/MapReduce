@@ -3,8 +3,11 @@
 // If there is delay at origin append O if the delay at destination then Append D, If there is delay
 //-at both Origin and destination then append B
 
-// Note: Every Mapper has a setup to initialize the resources for the mapper
-//-Capture the parameters details from it
+// Note: Every Mapper has a setup to initialize the task level resources for the mapper
+//- and Capture the parameters details for Mapper and reducer examples
+
+// Parameters:
+// Airlinedata Airlineout –D map.where.delay=10
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -88,7 +91,6 @@ public class WhereClauseMRjob extends Configured implements Tool {
             System.err.printf("Invalid parameters supplied");
             return -1;
         }
-
 
         Configuration conf = new Configuration();
         Job job = new Job(conf, "Just the Mapper");
