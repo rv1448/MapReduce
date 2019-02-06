@@ -39,14 +39,14 @@ public class Fileparser1 {
 
     public static String getDate()   {
 
-            String a = new String(getYear() + "-" + getMonth() + "-" + "1");
+//            String a = new String(getYear() + "-" + getMonth() + "-" + "1");
 
 
 //            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 //        LocalDate date = LocalDate.of()
 //        Date y = Date.parse( a);
 //            Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(a);
-            return a;
+            return getYear() + "-" + getMonth() + "-" + "1";
         }
 //
 //    catch(Exception e){
