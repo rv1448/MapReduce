@@ -30,7 +30,6 @@ public class WhereClauseMRjob extends Configured implements Tool {
 
     private static int delayminute = 0;
 
-
     public void setup(Mapper.Context context) throws IOException{
         delayminute = context.getConfiguration().getInt("map.where.delay",1);
     }

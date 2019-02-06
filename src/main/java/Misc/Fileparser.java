@@ -1,4 +1,4 @@
-package mapreduce;
+package Misc;
 
 
 public  class Fileparser {
