@@ -1,6 +1,6 @@
 package mapreduce;
 
-public class Fileparser1 {
+public class AirlineUtilParse {
     private static String Year, Month, DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier;
     private static String FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin;
     private static String Dest, Distance, TaxiIn, TaxiOut, Cancelled;
@@ -96,7 +96,7 @@ public class Fileparser1 {
     }
 
     public static void setCRSArrTime(String CRSArrTime) {
-        Fileparser1.CRSArrTime = row1[7];
+        AirlineUtilParse.CRSArrTime = row1[7];
     }
 
     public static String getUniqueCarrier() {
@@ -136,7 +136,7 @@ public class Fileparser1 {
     }
 
     public static void setCRSElapsedTime(String CRSElapsedTime) {
-        Fileparser1.CRSElapsedTime = row1[12];
+        AirlineUtilParse.CRSElapsedTime = row1[12];
     }
 
     public static String getAirTime() {
@@ -248,7 +248,7 @@ public class Fileparser1 {
     }
 
     public static void setNASDelay(String NASDelay) {
-        Fileparser1.NASDelay = row1[26];
+        AirlineUtilParse.NASDelay = row1[26];
     }
 
     public static String getSecurityDelay() {

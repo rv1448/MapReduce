@@ -42,12 +42,12 @@ public class AirlinedataBZ2 extends Configured implements Tool {
 //            }
 
             try {
-//               Fileparser1 f = new Fileparser1();
+//               AirlineUtilParse f = new AirlineUtilParse();
 
-                String[] k = Fileparser1.splitrow(h);
-                if (Fileparser1.isheader(k) != true) {
+                String[] k = AirlineUtilParse.splitrow(h);
+                if (AirlineUtilParse.isheader(k) != true) {
 
-                    StringBuilder m = Fileparser1.commaseparated(k);
+                    StringBuilder m = AirlineUtilParse.commaseparated(k);
 
                     context.write(new Text(m.toString()), new IntWritable(1));
                 }
