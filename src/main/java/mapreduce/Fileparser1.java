@@ -1,14 +1,14 @@
 package mapreduce;
 
 public class Fileparser1 {
-    private static  String Year, Month, DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier;
+    private static String Year, Month, DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier;
     private static String FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin;
     private static String Dest, Distance, TaxiIn, TaxiOut, Cancelled;
-    private static  String CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay;
+    private static String CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay;
     private static String[] row1;
 
-    public static  String[] splitrow(String rowt) {
-         row1 = rowt.split(",");
+    public static String[] splitrow(String rowt) {
+        row1 = rowt.split(",");
         return row1;
     }
 
@@ -30,14 +30,14 @@ public class Fileparser1 {
     }
 
     public static void setMonth(String[] row1) {
-        Month =  row1[1];
+        Month = row1[1];
     }
 
     public static String getDayofMonth() {
         return DayofMonth;
     }
 
-    public static String getDate()   {
+    public static String getDate() {
 
 //            String a = new String(getYear() + "-" + getMonth() + "-" + "1");
 
@@ -46,8 +46,8 @@ public class Fileparser1 {
 //        LocalDate date = LocalDate.of()
 //        Date y = Date.parse( a);
 //            Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(a);
-            return getYear() + "-" + getMonth() + "-" + "1";
-        }
+        return getYear() + "-" + getMonth() + "-" + "1";
+    }
 //
 //    catch(Exception e){
 //        return new SimpleDateFormat("yyyy-mm-dd").parse("9999-12-01");
@@ -341,19 +341,16 @@ public class Fileparser1 {
         return comma;
     }
 
-
-    public static StringBuilder commaseperatedwithfields(String[] arr){
+    public static StringBuilder commaseperatedwithfields(String[] arr) {
         StringBuilder comma = new StringBuilder(" ");
         comma.append(arr[0]).append(",");
 
-        for(int i = 1 ; i<= arr.length; i++){
+        for (int i = 1; i <= arr.length; i++) {
             comma.append(",").append(i);
         }
 
         return comma;
     }
-
-
 
 
 }
