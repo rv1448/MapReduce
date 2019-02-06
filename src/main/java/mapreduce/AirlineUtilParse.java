@@ -267,6 +267,14 @@ public class AirlineUtilParse {
         LateAircraftDelay = row1[28];
     }
 
+    public static int parseMinutes(String minutes, int defaultValue) {
+        try {
+            return Integer.parseInt(minutes);
+        } catch (Exception ex) {
+            return defaultValue;
+        }
+    }
+
     public static StringBuilder commaseparated(String[] arr) {
         StringBuilder comma = new StringBuilder(" ");
         Year = arr[0];
