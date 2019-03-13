@@ -1,5 +1,8 @@
 package mapreduce;
 
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.RecordWriter;
@@ -46,8 +49,12 @@ public class XMLOutputFormat extends FileOutputFormat<LongWritable, Text> {
     }
 
     @Override
-    public RecordWriter getRecordWriter(TaskAttemptContext taskAttemptContext) {
+    public RecordWriter getRecordWriter(TaskAttemptContext job) throws IOException {
 //        return new XMLRecordWriter();
-        return null;
+        String extension = ".xml";
+        Path file = getDefaultWorkFile(job, extension);
+        FileSystem fs = file.getFileSystem(job.getConfiguration());
+        FSDataOutputStream fileOut = fs.create(file, false);
+        return new XMLRecordWriter(fileOut);
     }
 }
