@@ -41,8 +41,8 @@ public class Wc1 extends Configured implements Tool {
     public static class reducer1 extends Reducer<Text,IntWritable,Text,IntWritable> {
 
         @Override
-        public void reduce(Text m, Iterable<IntWritable> n, Context context) throws IOException, InterruptedException {
-            IntWritable result = new IntWritable();
+        public void reduce(final Text m, final Iterable<IntWritable> n, Context context) throws IOException, InterruptedException {
+            IntWritable result = new IntWritable(0);
             int sum = 0;
             for(IntWritable i: n){
                sum += i.get();
