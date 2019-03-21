@@ -10,6 +10,11 @@ public class AirlineDataParse {
         return record.toString().split(",")[0].equalsIgnoreCase("Year");
     }
 
+    public static boolean isheader(String record){
+        return record.toString().split(",")[0].equalsIgnoreCase("Year");
+    }
+
+
 
 
     public static void main(String[] args) throws IOException {
@@ -19,17 +24,22 @@ public class AirlineDataParse {
 
         BufferedReader y = new BufferedReader(x);
 
-        for(String p; (p = y.readLine()) != null;){
+
+        for(String p; (p = y.readLine()) != null;)
+        {
             System.out.println(p);
-        }
+            if(!isheader(p)){
+            //isheader(p);
 
-//        while(y.readLine() != "0"){
-//        System.out.println(y.readLine());
-//        }
+                try{
 
-//        InputStream i = new InputStream.read
-//        i = new InputStreamReader(new FileReader(""));
-//        File file = new File();
-//        BufferedReader i = new BufferedReader(FileReader())
-    }
+                }
+
+                catch (Exception e){
+                    System.out.println("this cannot be printed out");
+                }
+
+            }
+
+    }}
 }
