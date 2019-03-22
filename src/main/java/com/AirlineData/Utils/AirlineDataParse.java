@@ -1,8 +1,12 @@
 package com.AirlineData.Utils;
-
+import mapreduce.AirlineUtilParse;
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.io.Text;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class AirlineDataParse {
 
@@ -10,6 +14,8 @@ public class AirlineDataParse {
     private static String FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin;
     private static String Dest, Distance, TaxiIn, TaxiOut, Cancelled;
     private static String CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay;
+    private static String Date;
+
 
 
     public static String getYear() {
@@ -22,6 +28,34 @@ public class AirlineDataParse {
 
     public static String getDayofMonth() {
         return DayofMonth;
+    }
+
+
+    public static String getDate(){
+        String month,day;
+        StringBuilder a = new StringBuilder();
+
+
+         if(getMonth().length() == 1){
+             month = "0"+getMonth();
+         }
+         else {
+             month = getMonth();
+         }
+         if(getDayofMonth().length() == 1){
+             day = "0"+getDayofMonth();
+         }
+        else {
+            day = getDayofMonth();
+         }
+
+        a.append(getYear());
+        a.append("-");
+        a.append(month);
+        a.append("-");
+        a.append(day);
+
+     return  a.toString();
     }
 
     public static String getDayOfWeek() {
@@ -174,9 +208,16 @@ public class AirlineDataParse {
         NASDelay = arr[26];
         SecurityDelay = arr[27];
         LateAircraftDelay = arr[28];
-}
+        Date = getDate();
+    }
 
 
+
+  public static String stringconcatenate(){
+     String[] builder =  {getDate(), getDepTime(),getArrTime(),getOrigin(),getDest(),getDistance()
+     ,getActualElapsedTime(),getWeatherDelay()};
+    return   StringUtils.join(builder,"|");
+   }
     public static void main(String[] args) throws IOException {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("1990_test.csv");
@@ -184,30 +225,14 @@ public class AirlineDataParse {
 
         BufferedReader y = new BufferedReader(x);
 
-
         for(String p; (p = y.readLine()) != null;)
         {
            if(!isheader(p)){
-//               System.out.print(p);
             AirlineDataParse.Assignvalues(p);
-               System.out.println(AirlineDataParse.getDayofMonth());
-           }
-
-
-//            System.out.println(p);
-//            if(!isheader(p)){
-//            //isheader(p);
-//
-//                try{
-//
-//                }
-//
-//                catch (Exception e){
-//                    System.out.println("this cannot be printed out");
-//                }
-//
-//            }
+            System.out.println(AirlineDataParse.stringconcatenate());
+        }
 
     }
+
     }
 }
