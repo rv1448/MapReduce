@@ -1,12 +1,12 @@
 package com.AirlineData.Utils;
-import mapreduce.AirlineUtilParse;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.io.Text;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class AirlineDataParse {
 
@@ -17,37 +17,35 @@ public class AirlineDataParse {
     private static String Date;
 
 
-
     public static String getYear() {
+
         return Year;
     }
 
     public static String getMonth() {
-        return Month;
+        return StringUtils.leftPad(Month,2,"0");
     }
 
     public static String getDayofMonth() {
-        return DayofMonth;
+        return StringUtils.leftPad(DayofMonth,2,"0");
     }
 
 
-    public static String getDate(){
-        String month,day;
+    public static String getDate() {
+        String month, day;
         StringBuilder a = new StringBuilder();
 
 
-         if(getMonth().length() == 1){
-             month = "0"+getMonth();
-         }
-         else {
-             month = getMonth();
-         }
-         if(getDayofMonth().length() == 1){
-             day = "0"+getDayofMonth();
-         }
-        else {
+        if (getMonth().length() == 1) {
+            month = "0" + getMonth();
+        } else {
+            month = getMonth();
+        }
+        if (getDayofMonth().length() == 1) {
+            day = "0" + getDayofMonth();
+        } else {
             day = getDayofMonth();
-         }
+        }
 
         a.append(getYear());
         a.append("-");
@@ -55,7 +53,7 @@ public class AirlineDataParse {
         a.append("-");
         a.append(day);
 
-     return  a.toString();
+        return a.toString();
     }
 
     public static String getDayOfWeek() {
@@ -163,18 +161,48 @@ public class AirlineDataParse {
     }
 
 
-    public static boolean isheader(Text record){
+    public static boolean isheader(Text record) {
         return record.toString().split(",")[0].equalsIgnoreCase("Year");
     }
 
-    public static boolean isheader(String record){
+    public static boolean isheader(String record) {
         return record.split(",")[0].equalsIgnoreCase("Year");
     }
 
-    public static void Assignvalues(String record){
+    public static String getDepartureDatetime( ) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getYear())
+                .append(getMonth())
+                .append(getDayofMonth())
+                .append(getDepTime());
 
 
-      String[] arr =   record.split(",");
+        return builder.toString();
+    }
+
+    public static String getArrivalDatetime() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getYear())
+                .append(getMonth())
+                .append(getDayofMonth())
+                .append(getArrTime());
+
+
+        return builder.toString();
+    }
+
+    public static int parseMinutes(String minutes, int defaultValue) {
+        try {
+            return Integer.parseInt(minutes);
+        } catch (Exception ex) {
+            return defaultValue;
+        }
+    }
+
+    public static void Assignvalues(String record) {
+
+
+        String[] arr = record.split(",");
 
         Year = arr[0];
         Month = arr[1];
@@ -212,27 +240,27 @@ public class AirlineDataParse {
     }
 
 
+    public static String stringconcatenate() {
+        String[] builder = {getDate(), getDepartureDatetime(), getArrivalDatetime(), getOrigin(), getDest(), getDistance()
+                , getActualElapsedTime(), getCRSArrTime(), getArrDelay(),getDepDelay()};
+        return StringUtils.join(builder, ",");
+    }
 
-  public static String stringconcatenate(){
-     String[] builder =  {getDate(), getDepTime(),getArrTime(),getOrigin(),getDest(),getDistance()
-     ,getActualElapsedTime(),getWeatherDelay()};
-    return   StringUtils.join(builder,"|");
-   }
+
     public static void main(String[] args) throws IOException {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("1990_test.csv");
-        InputStreamReader x = new InputStreamReader(is,"UTF-8");
+        InputStreamReader x = new InputStreamReader(is, "UTF-8");
 
         BufferedReader y = new BufferedReader(x);
 
-        for(String p; (p = y.readLine()) != null;)
-        {
-           if(!isheader(p)){
-            AirlineDataParse.Assignvalues(p);
-            System.out.println(AirlineDataParse.stringconcatenate());
-        }
+        for (String p; (p = y.readLine()) != null; ) {
+            if (!isheader(p)) {
+                AirlineDataParse.Assignvalues(p);
+                System.out.println(AirlineDataParse.stringconcatenate());
+            }
 
-    }
+        }
 
     }
 }
