@@ -12,9 +12,16 @@ public class WhereclauseMR extends Configured implements Tool {
 
      class Whereclausemapper extends Mapper<LongWritable, Text, NullWritable,Text>{
 
+         private int delayminutes;
+
+        @Override
+         public void setup(Context context){
+            delayminutes = context.getConfiguration().getInt("map.where.delay",1);
+        }
 
 
-    }
+
+     }
 
 
     class Whereclausereducer extends Reducer<NullWritable,Text,NullWritable,Text> {
