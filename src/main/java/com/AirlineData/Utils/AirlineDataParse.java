@@ -198,7 +198,14 @@ public class AirlineDataParse {
             return defaultValue;
         }
     }
-
+    public static boolean parseBoolean(String bool, boolean defaultValue) {
+        try {
+            int iBool = Integer.parseInt(bool);
+            return (iBool == 1);
+        } catch (Exception ex) {
+            return defaultValue;
+        }
+    }
     public static void Assignvalues(String record) {
 
 

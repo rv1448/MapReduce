@@ -16,7 +16,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
-public class WhereclauseMR extends Configured implements Tool {
+public class WhereclauseMRJob extends Configured implements Tool {
 
     public static class Whereclausemapper extends Mapper<LongWritable, Text, NullWritable, Text> {
 
@@ -56,7 +56,8 @@ public class WhereclauseMR extends Configured implements Tool {
             }
 
 
-//            if (AirlineDataParse.isheader(value.toString())) {
+//       Alternate way for implementation
+//      if (AirlineDataParse.isheader(value.toString())) {
 //                return;
 //            }
 //
@@ -108,7 +109,7 @@ public class WhereclauseMR extends Configured implements Tool {
     }
 
     public static void main(String[] args) throws Exception {
-        int exitcode = ToolRunner.run(new WhereclauseMR(),args);
+        int exitcode = ToolRunner.run(new WhereclauseMRJob(),args);
         System.exit(exitcode);
     }
 }
